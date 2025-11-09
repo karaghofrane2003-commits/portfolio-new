@@ -26,13 +26,13 @@ const Index = () => {
       <CursorEffect />
       
       {/* Copyright Footer */}
-      <footer className="py-8 px-6 bg-card/20 border-t border-border/30">
+      {/* <footer className="py-8 px-6 bg-card/20 border-t border-border/30">
         <div className="container mx-auto text-center">
           <p className="text-muted-foreground text-sm">
             © 2024 Ghofrane. All rights reserved.
           </p>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };
