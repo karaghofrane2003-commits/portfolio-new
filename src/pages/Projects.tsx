@@ -479,11 +479,13 @@
 
 // 3version-----------------------------------------------------------------------
 import { useState } from 'react';
-import { ExternalLink, FileText, Star } from 'lucide-react';
+import { FileText, Star } from 'lucide-react';
 import { GalaxyBackground } from '@/components/GalaxyBackground';
 import { Navigation } from '@/components/Navigation';
 import { Link } from 'react-router-dom';
-import blender3D from '@/assets/project-blender-3d.jpg';
+import Ring from '@/assets/1.png';
+import House from '@/assets/image.png';
+
 
 type Category = 'ALL' | 'WEB_3D' | 'WEBSITE' | 'MOBILE_APP' | 'DESIGN';
 
@@ -503,8 +505,8 @@ const PROJECTS: Project[] = [
   {
     id: '1',
     title: '3D Room Model',
-    description: '3D model of a small room using Blender',
-    image: blender3D,
+    description: 'A 3D model of a small room using Blender',
+    image: House,
     category: 'WEB_3D',
     url: 'https://example.com/project1',
     github: 'https://github.com/example/project1',
@@ -513,26 +515,26 @@ const PROJECTS: Project[] = [
   },
   {
     id: '2',
-    title: '3D Ring Animation',
-    description: 'A 3D animated scene representing a ring ',
-    image: blender3D,
+    title: '3D Ring Model',
+    description: 'A 3D animated scene representing a modern diamond ring using Blender',
+    image: Ring,
     category: 'WEB_3D',
     url: 'https://example.com/project2',
     github: 'https://github.com/example/project2',
     technologies: ['Blender'],
     featured: false
   },
-  {
-    id: '3',
-    title: ' 3D Green House ',
-    description: 'comming soon',
-    image: blender3D,
-    category: 'WEB_3D',
-    url: 'https://example.com/project3',
-    github: 'https://github.com/example/project3',
-    technologies: ['Blender'],
-    featured: false
-  }
+  // {
+  //   id: '3',
+  //   title: '3D Green House',
+  //   description: 'comming soon',
+  //   image: Ring,
+  //   category: 'WEB_3D',
+  //   url: 'https://example.com/project3',
+  //   github: 'https://github.com/example/project3',
+  //   technologies: ['Blender'],
+  //   featured: false
+  // }
 ];
 
 const Projects = () => {
@@ -545,7 +547,7 @@ const Projects = () => {
 
   const categories = [
     { id: 'ALL', label: 'ALL' },
-    { id: 'WEB_3D', label: 'WEB_3D ' },
+    { id: 'WEB_3D', label: ' WEB 3D ' },
     { id: 'WEBSITE', label: 'WEBSITES' },
     { id: 'MOBILE_APP', label: 'MOBILE APP' },
     { id: 'DESIGN', label: 'DESIGN' }
@@ -592,7 +594,7 @@ const Projects = () => {
         {/* Projects by Category */}
         {selectedCategory === 'ALL' ? (
           // Show all projects without category titles
-          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {filteredProjects.map(project => (
               <ProjectCard key={project.id} project={project} />
             ))}
@@ -605,7 +607,7 @@ const Projects = () => {
                 {getCategoryLabel(selectedCategory)}
               </span>
             </h2>
-            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {filteredProjects.map(project => (
                 <ProjectCard key={project.id} project={project} />
               ))}
@@ -630,7 +632,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   const getCategoryLabel = (category: Category) => {
     const labels: Record<Category, string> = {
       'ALL': 'All',
-      'WEB_3D': '3D Design',
+      'WEB_3D': 'WEB 3D ',
       'WEBSITE': 'Website',
       'MOBILE_APP': 'Mobile App',
       'DESIGN': 'Design'
@@ -639,73 +641,52 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   };
 
   return (
-    <div className="group">
-      {/* Project Card */}
-      <div className="bg-card/30 rounded-2xl border border-border/30 overflow-hidden hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20">
-        {project.featured && (
-          <div className="absolute top-4 right-4 z-10 bg-gradient-to-r from-primary to-accent px-3 py-1 rounded-full text-xs font-semibold text-primary-foreground flex items-center gap-1">
-            <Star size={12} />
-            Featured
-          </div>
-        )}
-
-        {/* Project Image */}
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-t-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-          <img
-            src={project.image}
-            alt={project.title}
-            className="relative w-full h-48 object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    <div className="group relative overflow-hidden card-cosmic">
+      {project.featured && (
+        <div className="absolute top-4 right-4 z-10 bg-gradient-to-r from-primary to-accent px-3 py-1 rounded-full text-xs font-semibold text-primary-foreground flex items-center gap-1">
+          <Star size={12} />
+          Featured
         </div>
+      )}
 
-        {/* Project Content */}
-        <div className="p-6 space-y-4">
-          <div className="inline-block px-3 py-1 bg-primary/20 text-primary rounded-full text-xs font-medium">
-            {getCategoryLabel(project.category)}
-          </div>
-          
-          <h3 className="text-xl font-bold text-glow">{project.title}</h3>
-          
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {project.description}
-          </p>
-
-          <div className="flex flex-wrap gap-2">
-            {project.technologies.slice(0, 3).map((tech) => (
-              <span
-                key={tech}
-                className="px-2 py-1 bg-card/50 text-foreground rounded-md border border-border/30 text-xs"
-              >
-                {tech}
-              </span>
-            ))}
-            {project.technologies.length > 3 && (
-              <span className="px-2 py-1 text-xs text-muted-foreground">
-                +{project.technologies.length - 3} more
-              </span>
-            )}
-          </div>
-
-          <div className="flex gap-3 pt-2">
-            <Link
-              to="/project-detail"
-              className="flex items-center gap-2 px-4 py-2 bg-card/30 hover:bg-card/50 rounded-lg transition-all duration-300 text-sm"
+      <div className="relative overflow-hidden rounded-xl mb-6">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        <div className="absolute bottom-4 left-4 right-4 flex justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+          <div className="flex justify-center">
+            <Link 
+              to={`/project-detail-${project.id}`}
+              className="px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 bg-gradient-to-r from-primary to-accent text-primary-foreground hover:shadow-lg hover:shadow-primary/50"
             >
-              <FileText size={16} />
-              <span>Details</span>
+              View Project
             </Link>
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-lg transition-all duration-300 text-sm"
-            >
-              <ExternalLink size={16} />
-              <span>Demo</span>
-            </a>
           </div>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <div className="inline-block px-3 py-1 bg-primary/20 text-primary rounded-full text-xs font-medium">
+          {getCategoryLabel(project.category)}
+        </div>
+        
+        <h3 className="text-2xl font-bold text-glow">{project.title}</h3>
+        
+        <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+        
+        <div className="flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <span
+              key={tech}
+              className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm font-medium"
+            >
+              {tech}
+            </span>
+          ))}
         </div>
       </div>
     </div>
